@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "中文文档标点规范"
+  short_description: "统一中文正式文档中的标点、空格和明确上下角标，并保留参考文献和引用标。"
+  default_prompt: "请按中文正式文档规范整理正文的标点、空格和明确上下角标，并保留参考文献和引用标。"
