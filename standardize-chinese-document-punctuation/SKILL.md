@@ -41,6 +41,10 @@ Do not alter citation markers in正文, footnotes, endnotes, captions, tables, o
 
 If citation punctuation conflicts with this skill's Chinese punctuation rules, preserve the citation as-is.
 
+For `.docx` academic documents that use Word cross-references or fields for numeric citation markers, preserve the whole citation marker as a citation unit. If a citation marker is superscripted, every visible and field-related run in the marker must remain superscripted, including brackets, commas, hyphens, field begin/separate/end runs, field instruction runs, and the displayed field-result number runs between `w:fldCharType="separate"` and `w:fldCharType="end"`. Do not rely on the field-code run's superscript formatting alone, because Word field updates can regenerate the displayed result run as baseline text.
+
+When creating or repairing Word REF citation fields, prefer adding a formatting-preservation switch such as `\* MERGEFORMAT` or `\* CHARFORMAT`, then update fields, then perform a final pass that confirms all displayed REF field-result number runs inside citation markers still have `w:vertAlign w:val="superscript"` when the surrounding citation marker is superscripted. Preserve the REF field and bibliography bookmark structure; do not replace cross-references with static text unless the user explicitly asks.
+
 ## Superscript and Subscript Rules
 
 Apply these rules conservatively. Do not let superscript/subscript normalization override reference, citation, footnote, endnote, URL, code, path, version, model-number, product-name, gene/protein-name, or document-ID protection.
@@ -178,3 +182,4 @@ Before finishing, scan for these common issues:
 - Chemical counts that should clearly be subscripts, such as `H2O`, `CO2`, `Na2SO4`, and `Ca(OH)2`.
 - Clear charge/exponent/unit notation that should be superscript, such as `NH4+`, `SO4^2-`, `x^2`, `10^6`, `m2`, and `cm3`.
 - Accidental edits to references, citations, footnotes, endnotes, gene/protein names, versions, models, URLs, code, and document IDs.
+- For `.docx` files with Word REF cross-reference citation fields, no citation field result number between `w:fldCharType="separate"` and `w:fldCharType="end"` should lose superscript formatting when the citation marker is superscripted; verify this after any Word `Fields.Update()` or PDF export.
